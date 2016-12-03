@@ -155,6 +155,8 @@ public class ShortestPathTests {
         assertEquals(15.0,findPathSum(actual), EPSILON);
     }
 
+    //Helper method that will find the path sum, and can be compared to the shortest path
+    //sum to see if a path of the shortest length was found
     private static double findPathSum(List<cs311.hw7.graph.IGraph.Edge<IWeight>> list){
         double sum = 0.0;
         for(cs311.hw7.graph.IGraph.Edge<IWeight> edge : list){
@@ -163,19 +165,13 @@ public class ShortestPathTests {
         return sum;
     }
 
-    private static void printLists(List<cs311.hw7.graph.IGraph.Edge<IWeight>> list1,List<cs311.hw7.graph.IGraph.Edge<IWeight>> list2 ){
+    //Will print out a list of Edges for debugging purposes.
+    private static void printLists(List<cs311.hw7.graph.IGraph.Edge<IWeight>> list1){
         double sum = 0;
         for(cs311.hw7.graph.IGraph.Edge<IWeight> edge : list1){
             System.out.println(edge.getVertexName1() + " " + edge.getVertexName2() + " " + edge.getEdgeData());
                 sum += edge.getEdgeData().getWeight();
             }
-        System.out.println(sum);
-        System.out.println();
-        sum = 0;
-        for(cs311.hw7.graph.IGraph.Edge<IWeight> edge : list2){
-            System.out.println(edge.getVertexName1() + " " + edge.getVertexName2() + " " + edge.getEdgeData());
-            sum += edge.getEdgeData().getWeight();
-        }
         System.out.println(sum);
     }
 
