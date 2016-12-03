@@ -1,6 +1,6 @@
 package cs311.hw8.graphalgorithms;
 
-import cs311.hw7.graph.Graph;
+import cs311.hw8.graph.Graph;
 
 import static cs311.hw8.graphalgorithms.GraphAlgorithms.*;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class ShortestPathTests {
         g.addEdge("A", "C", new Weight(2));
         g.addEdge("C", "B", new  Weight(2));
 
-        List<cs311.hw7.graph.IGraph.Edge<IWeight>> expected= new ArrayList<>();
+        List<cs311.hw8.graph.IGraph.Edge<IWeight>> expected= new ArrayList<>();
         expected.add(g.getEdge("A","C"));
         expected.add(g.getEdge("C","B"));
 
@@ -60,7 +60,7 @@ public class ShortestPathTests {
         g.addEdge("E", "D", new  Weight(4));
         g.addEdge("D", "F", new  Weight(11));
 
-        List<cs311.hw7.graph.IGraph.Edge<IWeight>> expected= new ArrayList<>();
+        List<cs311.hw8.graph.IGraph.Edge<IWeight>> expected= new ArrayList<>();
         expected.add(g.getEdge("A","C"));
         expected.add(g.getEdge("C","E"));
         expected.add(g.getEdge("E","D"));
@@ -139,7 +139,7 @@ public class ShortestPathTests {
         g.addEdge("S", "Z", new  Weight(2));
         g.addEdge("T", "Z", new  Weight(1));
 
-//        List<cs311.hw7.graph.IGraph.Edge<IWeight>> expected= new ArrayList<>();
+//        List<cs311.hw8.graph.IGraph.Edge<IWeight>> expected= new ArrayList<>();
 //        expected.add(g.getEdge("A","D"));
 //        expected.add(g.getEdge("D","G"));
 //        expected.add(g.getEdge("G","K"));
@@ -150,29 +150,48 @@ public class ShortestPathTests {
 //        expected.add(g.getEdge("P","T"));
 //        expected.add(g.getEdge("T","Z"));
 
-        List<cs311.hw7.graph.IGraph.Edge<IWeight>> actual = ShortestPath(g,"A","Z");
-        //printLists(15.0, actual);
-        assertEquals(15.0,findPathSum(actual), EPSILON);
+        List<cs311.hw8.graph.IGraph.Edge<IWeight>> actual = ShortestPath(g,"A","Z");
+        printLists(actual);
+        assertEquals(14.0,findPathSum(actual), EPSILON);
     }
 
     //Helper method that will find the path sum, and can be compared to the shortest path
     //sum to see if a path of the shortest length was found
-    private static double findPathSum(List<cs311.hw7.graph.IGraph.Edge<IWeight>> list){
+    private static double findPathSum(List<cs311.hw8.graph.IGraph.Edge<IWeight>> list){
         double sum = 0.0;
-        for(cs311.hw7.graph.IGraph.Edge<IWeight> edge : list){
+        for(cs311.hw8.graph.IGraph.Edge<IWeight> edge : list){
             sum += edge.getEdgeData().getWeight();
         }
         return sum;
     }
 
     //Will print out a list of Edges for debugging purposes.
-    private static void printLists(List<cs311.hw7.graph.IGraph.Edge<IWeight>> list1){
+    private static void printLists(List<cs311.hw8.graph.IGraph.Edge<IWeight>> list1){
         double sum = 0;
-        for(cs311.hw7.graph.IGraph.Edge<IWeight> edge : list1){
+        for(cs311.hw8.graph.IGraph.Edge<IWeight> edge : list1){
             System.out.println(edge.getVertexName1() + " " + edge.getVertexName2() + " " + edge.getEdgeData());
                 sum += edge.getEdgeData().getWeight();
             }
         System.out.println(sum);
+    }
+
+    private class Weight implements IWeight {
+
+        public double weight;
+
+        public Weight(double weight){
+            this.weight = weight;
+        }
+
+        @Override
+        public double getWeight() {
+            return weight;
+        }
+
+        @Override
+        public String toString(){
+            return weight + "";
+        }
     }
 
 }
